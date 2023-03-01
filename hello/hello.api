@@ -1,5 +1,5 @@
 type Request {
-	Name string `path:"name,options=you|me"`
+	Name string `path:"name"`
 }
 
 type Response {
@@ -8,5 +8,5 @@ type Response {
 
 service hello-api {
 	@handler HelloHandler
-	get /from/:name(Request) returns (Response)
+	get /hello/:name(Request) returns (Response)
 }

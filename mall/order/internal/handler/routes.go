@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	"zero-start/hello/internal/svc"
+	"zero-start/mall/order/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
@@ -14,8 +14,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/hello/:name",
-				Handler: HelloHandler(serverCtx),
+				Path:    "/from/:name",
+				Handler: OrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/get/:id",
+				Handler: GetOrderHandler(serverCtx),
 			},
 		},
 	)
