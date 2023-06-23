@@ -6,7 +6,21 @@ type Response {
 	Message string `json:"message"`
 }
 
+// GetOrderHandler
+type GetRequest {
+	ID string `path:"id"`
+}
+
+type GetResponse {
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Username string `json:"username"`
+}
+
 service order-api {
 	@handler OrderHandler
 	get /from/:name(Request) returns (Response)
+	
+	@handler GetOrderHandler
+	get /api/order/get/:id(GetRequest) returns (GetResponse)
 }
