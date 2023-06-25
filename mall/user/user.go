@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"zero-start/mall/user/internal/config"
+	"zero-start/mall/user/internal/dao"
 	"zero-start/mall/user/internal/server"
 	"zero-start/mall/user/internal/svc"
 	"zero-start/mall/user/types/user"
@@ -23,7 +24,9 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-	ctx := svc.NewServiceContext(c)
+
+	usre := dao.NewUserDao()
+	ctx := svc.NewServiceContext(c, usre)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user.RegisterUserServer(grpcServer, server.NewUserServer(ctx))
